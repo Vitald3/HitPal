@@ -7,6 +7,7 @@ Widget registerName(RegisterController controller) {
       padding: const EdgeInsets.symmetric(horizontal: 40),
       child: TextFormField(
           controller: controller.nameField,
+          textAlign: TextAlign.center,
           decoration: const InputDecoration(
             fillColor: Colors.transparent,
             contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),

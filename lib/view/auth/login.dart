@@ -156,7 +156,11 @@ class LoginView extends StatelessWidget {
                                   side: const BorderSide(width: 1, color: primaryColor)
                               ),
                             ),
-                            child: const Text(
+                            child: controller.submitButton.value ? const SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(color: Colors.white)
+                            ) : const Text(
                                 'NEXT',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(

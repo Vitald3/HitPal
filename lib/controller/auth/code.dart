@@ -1,11 +1,13 @@
 import 'package:get/get.dart';
-import 'package:hitpal/utils/function.dart';
+import '/utils/function.dart';
+import '../../main.dart';
 
 class CodeController extends GetxController {
   final String phone;
   final String code;
   RxBool editing = false.obs;
   RxString verificationCode = ''.obs;
+  RxBool submitButton = false.obs;
   CodeController(this.phone, this.code);
 
   Future<void> next() async {
@@ -17,6 +19,7 @@ class CodeController extends GetxController {
     }
 
     if (code == verificationCode.value) {
+      prefs?.setString('token', '1234');
       Get.toNamed('/');
     } else {
       snackBar(error: true, text: 'Verification code error');

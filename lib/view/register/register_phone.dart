@@ -1,14 +1,17 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:phone_form_field/phone_form_field.dart';
 import '../../controller/register/register.dart';
 import '../../utils/constant.dart';
 
-Widget registerEmail(RegisterController controller) {
+Widget registerPhone(RegisterController controller, BuildContext context) {
   return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 40),
-      child: TextFormField(
-          textAlign: TextAlign.center,
-          controller: controller.emailField,
+      child: PhoneFormField(
+          controller: controller.phoneField,
+          isCountryButtonPersistent: true,
+          isCountrySelectionEnabled: true,
+          autofillHints: const [AutofillHints.telephoneNumber],
+          countrySelectorNavigator: const CountrySelectorNavigator.modalBottomSheet(),
           decoration: const InputDecoration(
             fillColor: Colors.transparent,
             contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),
@@ -38,24 +41,32 @@ Widget registerEmail(RegisterController controller) {
             ),
           ),
           enabled: true,
+          background: const Color(0xFFEEF0F3),
           style: const TextStyle(
               color: Color(0xFF363853),
               fontSize: 20,
               fontFamily: 'SF Pro Display',
               letterSpacing: -0.41
           ),
-          validator: (String? val) {
-            if (val == '') {
-              return 'Field is required';
-            } else if (val != '' && !EmailValidator.validate(val!)) {
-              return 'Email is incorrect';
-            }
-
-            return null;
+          countryButtonStyle: const CountryButtonStyle(
+              showFlag: true,
+              textStyle: TextStyle(
+                  color: Color(0xFF363853),
+                  fontSize: 20,
+                  fontFamily: 'SF Pro Display',
+                  letterSpacing: -0.41
+              ),
+              padding: EdgeInsets.only(left: 0, right: 14),
+              showIsoCode: false,
+              showDialCode: true,
+              showDropdownIcon: true,
+              flagSize: 24
+          ),
+          validator: controller.getValidator(context),
+          onChanged: (PhoneNumber val) {
+            controller.nextButton.value = val.isValid();
           },
-          onChanged: (String val) {
-            controller.nextButton.value = val != '' && EmailValidator.validate(val);
-          }
+          cursorColor: const Color(0xff70E244)
       )
   );
 }

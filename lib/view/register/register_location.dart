@@ -11,6 +11,7 @@ Widget registerLocation(RegisterController controller) {
         children: [
           TextFormField(
               controller: controller.locationField,
+              textAlign: TextAlign.center,
               decoration: const InputDecoration(
                 fillColor: Colors.transparent,
                 contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),
@@ -62,7 +63,7 @@ Widget registerLocation(RegisterController controller) {
             visible: controller.locationVisible.value && controller.locationField.text != '' && controller.locations.where((e) => e.contains(controller.locationField.text)).isNotEmpty,
             child: Container(
                 width: Get.width,
-                height: 150,
+                height: 100,
                 margin: const EdgeInsets.only(top: 79),
                 decoration: ShapeDecoration(
                     color: Colors.white,

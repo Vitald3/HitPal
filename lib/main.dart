@@ -1,7 +1,6 @@
-import 'package:hitpal/view/auth/login.dart';
-import 'package:hitpal/view/onboard/onboard_2.dart';
-import 'package:hitpal/view/register/register.dart';
-
+import '/view/auth/login.dart';
+import '/view/onboard/onboard_2.dart';
+import '/view/register/register.dart';
 import '/view/onboard/onboard.dart';
 import 'view/main.dart';
 import 'package:get/get.dart';

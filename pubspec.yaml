@@ -23,6 +23,7 @@ dependencies:
 
   phone_form_field:
     path: phone_form_field
+  gallery_picker: ^0.5.1
 
 dev_dependencies:
   flutter_test:

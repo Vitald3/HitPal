@@ -2,11 +2,15 @@ import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:hitpal/view/register/register_age.dart';
-import 'package:hitpal/view/register/register_email.dart';
-import 'package:hitpal/view/register/register_gender.dart';
-import 'package:hitpal/view/register/register_location.dart';
-import 'package:hitpal/view/register/register_name.dart';
+import '/view/register/register_age.dart';
+import '/view/register/register_code.dart';
+import '/view/register/register_email.dart';
+import '/view/register/register_gender.dart';
+import '/view/register/register_level.dart';
+import '/view/register/register_location.dart';
+import '/view/register/register_name.dart';
+import '/view/register/register_phone.dart';
+import '/view/register/register_photo.dart';
 import '../../controller/register/register.dart';
 import '../../utils/constant.dart';
 
@@ -60,12 +64,18 @@ class RegisterView extends StatelessWidget {
                                   max: 8,
                                   min: 0,
                                   onChanged: (double value) {
+                                    int page = value.toInt();
 
-                                  },
+                                    if (page < controller.page.value || page <= controller.pageSuccess.value) {
+                                      controller.setPage(page);
+                                      controller.pageController.animateToPage(page, curve: Curves.decelerate, duration: const Duration(milliseconds: 300));
+                                      controller.nextButton.value = true;
+                                    }
+                                  }
                                 )
                             ),
                             Text(
-                                '${controller.pageStr}/8',
+                                '${controller.pageStr}/9',
                                 textAlign: TextAlign.right,
                                 style: const TextStyle(
                                     color: Colors.black,
@@ -100,7 +110,7 @@ class RegisterView extends StatelessWidget {
                         Obx(() => Column(
                             children: [
                               Expanded(child: PageView.builder(
-                                  itemCount: 8,
+                                  itemCount: 9,
                                   physics: !controller.nextButton.value ? const NeverScrollableScrollPhysics() : const ClampingScrollPhysics(),
                                   padEnds: false,
                                   allowImplicitScrolling: true,
@@ -138,6 +148,26 @@ class RegisterView extends StatelessWidget {
                                         widget = registerEmail(controller);
 
                                         break;
+                                      case 5:
+                                        title = 'YOUR LEVEL';
+                                        widget = registerLevel(controller);
+
+                                        break;
+                                      case 6:
+                                        title = 'PHONE NUMBER';
+                                        widget = registerPhone(controller, context);
+
+                                        break;
+                                      case 7:
+                                        title = 'PHONE NUMBER';
+                                        widget = registerCode(controller, context);
+
+                                        break;
+                                      case 8:
+                                        title = 'PROFILE PHOTO';
+                                        widget = registerPhoto(controller, context);
+
+                                        break;
                                       default:
                                         break;
                                     }
@@ -165,7 +195,7 @@ class RegisterView extends StatelessWidget {
                                   }
                               )),
                               const SizedBox(height: 15),
-                              Obx(() => ElevatedButton(
+                              controller.page.value < 7 || controller.page.value == 8 || controller.page.value == 7 && controller.verificationCode.value.length == 6 ? Obx(() => ElevatedButton(
                                   onPressed: () async {
                                     controller.next();
                                   },
@@ -180,10 +210,14 @@ class RegisterView extends StatelessWidget {
                                         side: BorderSide(width: 1, color: !controller.nextButton.value ? secondColor : primaryColor)
                                     ),
                                   ),
-                                  child: const Text(
-                                      'NEXT',
+                                  child: controller.submitButton.value ? const SizedBox(
+                                      width: 22,
+                                      height: 22,
+                                      child: CircularProgressIndicator(color: Colors.white)
+                                  ) : Text(
+                                      controller.page.value == 8 ? 'REGISTER' : 'NEXT',
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 22,
                                           fontFamily: 'Thunder',
@@ -191,7 +225,52 @@ class RegisterView extends StatelessWidget {
                                           letterSpacing: 0.77
                                       )
                                   )
-                              ))
+                              )) :
+                              Column(
+                                  children: [
+                                    if (controller.count.value > 0) Text(
+                                      'Send again in ${controller.strCount.value} seс',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                          color: Color(0xFF73737C),
+                                          fontWeight: FontWeight.w600,
+                                          letterSpacing: 0.04
+                                      ),
+                                    ),
+                                    if (controller.count.value > 0) const SizedBox(height: 10),
+                                    ElevatedButton(
+                                        onPressed: () async {
+                                          controller.reSend();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.white,
+                                          padding: const EdgeInsets.symmetric(horizontal: 12),
+                                          fixedSize: const Size(165, 38),
+                                          elevation: 0,
+                                          alignment: Alignment.center,
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(16),
+                                              side: const BorderSide(width: 1, color: Colors.white)
+                                          ),
+                                        ),
+                                        child: controller.submitButton.value ? const SizedBox(
+                                            width: 22,
+                                            height: 22,
+                                            child: CircularProgressIndicator(color: Colors.white)
+                                        ) : Text(
+                                            'SEND',
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                                color: !controller.nextButton.value ? const Color(0xff624AE0).withOpacity(.5) : const Color(0xff624AE0),
+                                                fontSize: 14,
+                                                fontFamily: 'Thunder',
+                                                fontWeight: FontWeight.w700,
+                                                letterSpacing: 0.77
+                                            )
+                                        )
+                                    )
+                                  ]
+                              )
                             ]
                         ))
                       ]
