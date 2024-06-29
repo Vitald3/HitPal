@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../controller/register/register.dart';
+import '../../main.dart';
 import '../../utils/constant.dart';
 import 'package:get/get.dart';
 
@@ -57,6 +58,10 @@ Widget registerLocation(RegisterController controller) {
               onChanged: (String val) {
                 controller.nextButton.value = val != '';
                 controller.locationVisible.value = controller.locations.where((e) => e.contains(controller.locationField.text)).isNotEmpty;
+
+                if (controller.locationVisible.value) {
+                  prefs?.setString('location', controller.locationField.text);
+                }
               }
           ),
           Obx(() => Visibility(

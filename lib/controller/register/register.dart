@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:gallery_picker/models/media_file.dart';
 import 'package:get/get.dart';
 import 'package:phone_form_field/phone_form_field.dart';
-
 import '../../main.dart';
+import '../../model/register/register_level_model.dart';
 
 class RegisterController extends GetxController {
   RxBool submitButton = false.obs;
@@ -20,6 +20,50 @@ class RegisterController extends GetxController {
   RxString pageStr = '1'.obs;
   RxString verificationCode = ''.obs;
   RxString gender = ''.obs;
+  final List<RegisterLevelModel> levelsList = [
+    RegisterLevelModel(
+        title: 'Beginner',
+        descr: 'Choose this level if you are just starting out and want to learn the basics of tennis.',
+        text: 'Has minimal to no prior tennis experience.',
+        text2: 'Focuses on understanding the rules, holding the racket, and practicing basic strokes.',
+        text3: 'Engages in easy-paced games aimed at fun and foundational skills development.'
+    ),
+    RegisterLevelModel(
+        title: 'Novice',
+        descr: 'Choose this level if you have a basic understanding of tennis but are still learning the ropes.',
+        text: 'Has completed 20-50 hours of beginner training.',
+        text2: 'Can rally comfortably at a slow speed.',
+        text3: 'Focuses on improving fundamental skills like forehand, backhand strokes, and basic serves.'
+    ),
+    RegisterLevelModel(
+        title: 'Intermediate',
+        descr: 'Choose this level if you are comfortable with the basics and ready for more challenging play.',
+        text: 'Has completed 50-100 hours of novice training.',
+        text2: 'Can rally comfortably at a medium speed.',
+        text3: 'Open to development in advanced stroke techniques such as serve, slice, and volley.'
+    ),
+    RegisterLevelModel(
+        title: 'Advanced',
+        descr: 'Choose this level if you are skilled and experienced, ready for fast-paced games and advanced strategies.',
+        text: 'Has completed 100-200 hours of intermediate training.',
+        text2: 'Can rally comfortably at high speed with consistency.',
+        text3: 'Focuses on advanced techniques such as spin control, powerful serves, and tactical play.'
+    ),
+    RegisterLevelModel(
+        title: 'Competitive',
+        descr: 'Choose this level if you play regularly in competitive settings and thrive on high-level competition.',
+        text: 'Has completed 200-500 hours of advanced training.',
+        text2: 'Can rally at very high speeds with precision.',
+        text3: 'Masters complex strategies, various types of serves, and mental game enhancement.'
+    ),
+    RegisterLevelModel(
+        title: 'Champion',
+        descr: 'Choose this level if you are a top-tier player with extensive experience and exceptional skills.',
+        text: 'Has completed over 500 hours of competitive training.',
+        text2: 'Can rally at the highest speeds with exceptional control.',
+        text3: 'Focuses on precision, advanced shot techniques, strategic mastery, and maintaining peak physical condition.'
+    )
+  ];
   TextEditingController nameField = TextEditingController();
   TextEditingController locationField = TextEditingController();
   TextEditingController emailField = TextEditingController();

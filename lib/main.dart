@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import '/view/auth/login.dart';
 import '/view/onboard/onboard_2.dart';
 import '/view/register/register.dart';
 import '/view/onboard/onboard.dart';
+import 'firebase_options.dart';
 import 'view/main.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,14 +13,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 SharedPreferences? prefs;
+late final FirebaseApp app;
+late final FirebaseAuth auth;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  app = await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  auth = FirebaseAuth.instanceFor(app: app);
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp
   ]);
   prefs = await SharedPreferences.getInstance();
-  prefs?.setString('token', '');
   runApp(const App());
 }
 
@@ -33,7 +41,7 @@ class App extends StatelessWidget {
               child: child!
           );
         },
-        initialRoute: (prefs?.getString('token') ?? '') != '' ? '/' : '/onboard',
+        initialRoute: auth.currentUser != null ? '/' : '/onboard',
         getPages: [
           GetPage(name: '/', page: () => const MainView()),
           GetPage(name: '/onboard', page: () => const OnboardView()),

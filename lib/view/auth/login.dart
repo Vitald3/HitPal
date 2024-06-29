@@ -1,6 +1,7 @@
 import 'package:flutter/services.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:flutter_verification_code/flutter_verification_code.dart';
 import 'package:get/get.dart';
 import 'package:phone_form_field/phone_form_field.dart';
 import '../../controller/auth/login.dart';
@@ -55,93 +56,159 @@ class LoginView extends StatelessWidget {
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       children: [
-                        Expanded(child: SingleChildScrollView(
-                            child: Form(
-                                key: controller.formKey,
-                                child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Text(
-                                        'PHONE NUMBER',
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                          color: Color(0xFF232538),
-                                          fontSize: 60,
-                                          fontFamily: 'Thunder',
-                                          fontWeight: FontWeight.w700,
-                                          letterSpacing: 2.10,
-                                        ),
-                                      ),
-                                      const SizedBox(height: 30),
-                                      Padding(
-                                          padding: const EdgeInsets.symmetric(horizontal: 40),
-                                          child: PhoneFormField(
-                                              controller: controller.loginField,
-                                              isCountryButtonPersistent: true,
-                                              isCountrySelectionEnabled: true,
-                                              autofillHints: const [AutofillHints.telephoneNumber],
-                                              countrySelectorNavigator: const CountrySelectorNavigator.modalBottomSheet(),
-                                              decoration: const InputDecoration(
-
-                                                fillColor: Colors.transparent,
-                                                contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),
-                                                focusedBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      width: 2,
-                                                      color: Color(0xff70E244),
-                                                    )
-                                                ),
-                                                focusedErrorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      width: 2,
-                                                      color: dangerColor,
-                                                    )
-                                                ),
-                                                errorBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                      width: 2,
-                                                      color: dangerColor,
-                                                    )
-                                                ),
-                                                enabledBorder: UnderlineInputBorder(
-                                                    borderSide: BorderSide(
-                                                        width: 2,
-                                                        color: Color(0xff70E244)
-                                                    )
-                                                ),
-                                              ),
-                                              enabled: true,
-                                              background: const Color(0xFFEEF0F3),
-                                              style: const TextStyle(
-                                                  color: Color(0xFF363853),
-                                                  fontSize: 20,
-                                                  fontFamily: 'SF Pro Display',
-                                                  letterSpacing: -0.41
-                                              ),
-                                              countryButtonStyle: const CountryButtonStyle(
-                                                  showFlag: true,
-                                                  textStyle: TextStyle(
-                                                      color: Color(0xFF363853),
-                                                      fontSize: 20,
-                                                      fontFamily: 'SF Pro Display',
-                                                      letterSpacing: -0.41
+                        const Text(
+                          'PHONE NUMBER',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Color(0xFF232538),
+                            fontSize: 60,
+                            fontFamily: 'Thunder',
+                            fontWeight: FontWeight.w700,
+                            letterSpacing: 2.10,
+                          ),
+                        ),
+                        Expanded(child: Form(
+                            key: controller.formKey,
+                            child: PageView.builder(
+                                itemCount: 9,
+                                physics: const NeverScrollableScrollPhysics(),
+                                padEnds: false,
+                                allowImplicitScrolling: true,
+                                controller: controller.pageController,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return SingleChildScrollView(
+                                      child: Column(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            if (index == 1) const SizedBox(height: 4),
+                                            if (index == 1) Container(
+                                                height: 23,
+                                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                                                clipBehavior: Clip.antiAlias,
+                                                decoration: ShapeDecoration(
+                                                  color: primaryColor,
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(300)
                                                   ),
-                                                  padding: EdgeInsets.only(left: 0, right: 14),
-                                                  showIsoCode: false,
-                                                  showDialCode: true,
-                                                  showDropdownIcon: true,
-                                                  flagSize: 24
-                                              ),
-                                              validator: controller.getValidator(context),
-                                              cursorColor: const Color(0xff70E244)
-                                          )
+                                                ),
+                                                child: const Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    mainAxisAlignment: MainAxisAlignment.center,
+                                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                                    children: [
+                                                      Text(
+                                                          'Write an SMS-code',
+                                                          textAlign: TextAlign.center,
+                                                          style: TextStyle(
+                                                            color: Colors.white,
+                                                            fontFamily: 'SF Pro Display',
+                                                            fontWeight: FontWeight.w600,
+                                                            letterSpacing: 0.04,
+                                                          )
+                                                      )
+                                                    ]
+                                                )
+                                            ),
+                                            const SizedBox(height: 30),
+                                            index == 0 ?
+                                            Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 40),
+                                                child: PhoneFormField(
+                                                    controller: controller.loginField,
+                                                    isCountryButtonPersistent: true,
+                                                    isCountrySelectionEnabled: true,
+                                                    autofillHints: const [AutofillHints.telephoneNumber],
+                                                    countrySelectorNavigator: const CountrySelectorNavigator.modalBottomSheet(),
+                                                    decoration: const InputDecoration(
+
+                                                      fillColor: Colors.transparent,
+                                                      contentPadding: EdgeInsets.symmetric(vertical: 20, horizontal: 18),
+                                                      focusedBorder: UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            width: 2,
+                                                            color: Color(0xff70E244),
+                                                          )
+                                                      ),
+                                                      focusedErrorBorder: UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            width: 2,
+                                                            color: dangerColor,
+                                                          )
+                                                      ),
+                                                      errorBorder: UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                            width: 2,
+                                                            color: dangerColor,
+                                                          )
+                                                      ),
+                                                      enabledBorder: UnderlineInputBorder(
+                                                          borderSide: BorderSide(
+                                                              width: 2,
+                                                              color: Color(0xff70E244)
+                                                          )
+                                                      ),
+                                                    ),
+                                                    enabled: true,
+                                                    background: const Color(0xFFEEF0F3),
+                                                    style: const TextStyle(
+                                                        color: Color(0xFF363853),
+                                                        fontSize: 20,
+                                                        fontFamily: 'SF Pro Display',
+                                                        letterSpacing: -0.41
+                                                    ),
+                                                    countryButtonStyle: const CountryButtonStyle(
+                                                        showFlag: true,
+                                                        textStyle: TextStyle(
+                                                            color: Color(0xFF363853),
+                                                            fontSize: 20,
+                                                            fontFamily: 'SF Pro Display',
+                                                            letterSpacing: -0.41
+                                                        ),
+                                                        padding: EdgeInsets.only(left: 0, right: 14),
+                                                        showIsoCode: false,
+                                                        showDialCode: true,
+                                                        showDropdownIcon: true,
+                                                        flagSize: 24
+                                                    ),
+                                                    validator: controller.getValidator(context),
+                                                    cursorColor: const Color(0xff70E244)
+                                                )
+                                            ) :
+                                            Padding(
+                                                padding: const EdgeInsets.symmetric(horizontal: 30),
+                                                child: VerificationCode(
+                                                    textStyle: const TextStyle(
+                                                        color: Color(0xFF363853),
+                                                        fontSize: 20,
+                                                        fontFamily: 'SF Pro Display',
+                                                        letterSpacing: -0.41
+                                                    ),
+                                                    keyboardType: TextInputType.number,
+                                                    length: 6,
+                                                    itemSize: (Get.width/6) - 24 > 40 ? 40 : (Get.width/6) - 24,
+                                                    underlineWidth: 2,
+                                                    underlineColor: const Color(0xff70E244),
+                                                    underlineUnfocusedColor: const Color(0xFFB3B3BB),
+                                                    cursorColor: const Color(0xff70E244),
+                                                    margin: const EdgeInsets.all(3),
+                                                    padding: const EdgeInsets.only(bottom: 9),
+                                                    onCompleted: (String value) {
+                                                      controller.verificationCode.value = value;
+                                                    },
+                                                    onEditing: (bool value) {
+                                                      controller.setEditing(value);
+                                                      if (!controller.editing.value) FocusScope.of(context).unfocus();
+                                                    }
+                                                )
+                                            )
+                                          ]
                                       )
-                                    ]
-                                )
+                                  );
+                                }
                             )
                         )),
                         const SizedBox(height: 15),
-                        ElevatedButton(
+                        Obx(() => ElevatedButton(
                             onPressed: () async {
                               controller.login();
                             },
@@ -171,7 +238,7 @@ class LoginView extends StatelessWidget {
                                     letterSpacing: 0.77
                                 )
                             )
-                        ),
+                        ))
                       ]
                     )
                 )

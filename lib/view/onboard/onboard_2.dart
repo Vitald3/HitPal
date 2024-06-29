@@ -84,7 +84,7 @@ class Onboard2View extends StatelessWidget {
                                                     alignment: Alignment.center,
                                                     child: Row(
                                                         children: [
-                                                          Image.asset('assets/images/icon1.png'),
+                                                          Image.asset('assets/images/icon1.png', width: 38, height: 38),
                                                           const SizedBox(width: 11),
                                                           const Expanded(child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -129,7 +129,7 @@ class Onboard2View extends StatelessWidget {
                                                     alignment: Alignment.center,
                                                     child: Row(
                                                         children: [
-                                                          Image.asset('assets/images/icon2.png'),
+                                                          Image.asset('assets/images/icon2.png', width: 38, height: 38),
                                                           const SizedBox(width: 11),
                                                           const Expanded(child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -174,7 +174,7 @@ class Onboard2View extends StatelessWidget {
                                                     alignment: Alignment.center,
                                                     child: Row(
                                                         children: [
-                                                          Image.asset('assets/images/icon3.png'),
+                                                          Image.asset('assets/images/icon3.png', width: 38, height: 38),
                                                           const SizedBox(width: 11),
                                                           const Expanded(child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -218,7 +218,7 @@ class Onboard2View extends StatelessWidget {
                                                     alignment: Alignment.center,
                                                     child: Row(
                                                         children: [
-                                                          Image.asset('assets/images/icon4.png'),
+                                                          Image.asset('assets/images/icon4.png', width: 38, height: 38),
                                                           const SizedBox(width: 11),
                                                           const Expanded(child: Column(
                                                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -301,7 +301,7 @@ class Onboard2View extends StatelessWidget {
                                 alignment: Alignment.center,
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(16),
-                                    side: const BorderSide(width: 1, color: const Color(0xff7B63FA))
+                                    side: const BorderSide(width: 1, color: Color(0xff7B63FA))
                                 ),
                               ),
                               child: const Text(

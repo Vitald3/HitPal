@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-
 import '../view/home/home.dart';
+import '../view/matches/matches.dart';
+import '../view/players/players.dart';
 
 class NavigationController extends GetxController {
   RxInt activeTab = 0.obs;
@@ -15,8 +16,8 @@ class NavigationController extends GetxController {
 
   final List<Widget> widgetOptions = <Widget>[
     const HomeView(),
-    const HomeView(),
-    const HomeView(),
+    const MatchesView(),
+    const PlayersView(),
     const HomeView()
   ];
 

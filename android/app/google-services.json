@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1042794088592",
+    "project_id": "hitpal-e4c90",
+    "storage_bucket": "hitpal-e4c90.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042794088592:android:5841305387d5ffe5ff3015",
+        "android_client_info": {
+          "package_name": "com.hitpal.hitpal"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN2cR2xT7vGK1WVp0tsCM_en1bQuOD6MI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
